@@ -24,7 +24,7 @@ namespace Projekattt1.Controllers
         public ActionResult Index()
         {
             var leavetypes = _repo.FindAll().ToList();
-            var model = _mapper.Map<List<LeaveTypes>, List<DetailsLeaveTypeVM>>(leavetypes);
+            var model = _mapper.Map<List<LeaveTypes>, List<LeaveTypeVM>>(leavetypes);
             return View(model);
         }
 
@@ -43,10 +43,22 @@ namespace Projekattt1.Controllers
         // POST: LeaveTypesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(LeaveTypeVM model)
         {
             try
             {
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                var leaveType = _mapper.Map<LeaveTypes>(model);
+                leaveType.DateCreated = DateTime.Now;
+                var isSuccess = _repo.Create(leaveType);
+                if (!isSuccess)
+                {
+                    ModelState.AddModelError("", "smth went wrong!");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

@@ -12,8 +12,8 @@ namespace Projekattt1.Mappings
     {
         public Maps()
         {
-            CreateMap<LeaveTypes, DetailsLeaveTypeVM>().ReverseMap();
-            CreateMap<LeaveTypes, CreateLeaveTypeVM>().ReverseMap();
+            CreateMap<LeaveTypes, LeaveTypeVM>().ReverseMap();
+            
             CreateMap<LeaveHistory, LeaveHistoryVM>().ReverseMap();
             CreateMap<LeaveAllocation, LeaveAllocationVM>().ReverseMap();
             CreateMap<Employee, EmployeeVM>().ReverseMap();

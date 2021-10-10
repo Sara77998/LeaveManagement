@@ -18,6 +18,6 @@ namespace Projekattt1.Data
         public DbSet<LeaveHistory> LeaveHistories { get; set; }
         public DbSet<LeaveTypes> LeaveTypes { get; set; }
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
-        public DbSet<Projekattt1.Models.DetailsLeaveTypeVM> DetailsLeaveTypeVM { get; set; }
+        public DbSet<Projekattt1.Models.LeaveTypeVM> DetailsLeaveTypeVM { get; set; }
     }
 }

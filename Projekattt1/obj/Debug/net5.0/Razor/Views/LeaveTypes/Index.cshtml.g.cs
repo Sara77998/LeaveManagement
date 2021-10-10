@@ -28,7 +28,7 @@ using Projekattt1.Models;
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"51f0baf954c16c449b1408f54104ba5de1f0218b", @"/Views/LeaveTypes/Index.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"fbe8da4dabc310c0d08b1e526a8687376c9bcc7e", @"/Views/_ViewImports.cshtml")]
-    public class Views_LeaveTypes_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Projekattt1.Models.DetailsLeaveTypeVM>>
+    public class Views_LeaveTypes_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IEnumerable<Projekattt1.Models.LeaveTypeVM>>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Create", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_1 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-action", "Edit", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -236,7 +236,7 @@ using Projekattt1.Models;
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<IEnumerable<Projekattt1.Models.DetailsLeaveTypeVM>> Html { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<IEnumerable<Projekattt1.Models.LeaveTypeVM>> Html { get; private set; }
     }
 }
 #pragma warning restore 1591
