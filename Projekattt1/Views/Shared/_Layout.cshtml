@@ -18,17 +18,19 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Apply for Leave</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle text-white" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                             Manage
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item text-white" href="#">Leave Types</a>
-                            <a class="dropdown-item text-white" href="#">Leave Allocations</a>
-                            <a class="dropdown-item text-white" href="#">Leave Applications</a>
-                            <a class="dropdown-item text-white" href="#">Employees</a>
-                        </div>
-                    </li>
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li><a class="dropdown-item " href="#">Leave Types</a></li>
+                            <li><a class="dropdown-item " href="#">Leave Allocations</a></li>
+                            <li><a class="dropdown-item " href="#">Leave Applications</a></li>
+                            <li><a class="dropdown-item " href="#">Employees</a></li>
+                        </ul>
+                    </div>
+                   
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

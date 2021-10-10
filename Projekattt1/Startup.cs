@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Projekattt1.Contracts;
 using Projekattt1.Data;
+using Projekattt1.Mappings;
 using Projekattt1.Repository;
 using System;
 using System.Collections.Generic;
@@ -37,6 +39,11 @@ namespace Projekattt1
             services.AddScoped<ILeaveTypeRepositiry, LeaveTypeRepository>();
             services.AddScoped<ILeaveHistoryRepository, LeaveHistoryRepository>();
             services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
+
+            //dodavanje mapera
+            services.AddAutoMapper(typeof(Maps));
+
+
             services.AddDatabaseDeveloperPageExceptionFilter();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
