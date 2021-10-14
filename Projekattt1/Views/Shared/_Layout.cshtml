@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -20,19 +25,24 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" asp-area="" asp-controller="" asp-action="">Apply for Leave</a>
                     </li>
-                    <div class="dropdown">
-                        <button class="btn btn-default dropdown-toggle text-white" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Manage
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a class="dropdown-item " asp-controller="LeaveTypes" asp-action="Index">Leave Types</a></li>
-                            <li><a class="dropdown-item " href="#">Leave Allocations</a></li>
-                            <li><a class="dropdown-item " href="#">Leave Applications</a></li>
-                            <li><a class="dropdown-item " href="#">Employees</a></li>
-                        </ul>
-                    </div>
-                   
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle text-white" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Manage
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a class="dropdown-item " asp-controller="LeaveTypes" asp-action="Index">Leave Types</a></li>
+                                <li><a class="dropdown-item " href="#">Leave Allocations</a></li>
+                                <li><a class="dropdown-item " href="#">Leave Applications</a></li>
+                                <li><a class="dropdown-item " href="#">Employees</a></li>
+                            </ul>
+                        </div>
+                    }
+
+
                 </ul>
                 <partial name="_LoginPartial" />
             </div>

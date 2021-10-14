@@ -89,7 +89,11 @@ namespace Projekattt1.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User created a new account with password.");                   
+                    //me seedujemo admina a svaki sl koji se prijavi na formu je Employee
+                    _userManager.AddToRoleAsync(user, "Employee").Wait();
+
+                    _logger.LogInformation("User created a new account with password.");  
+                    
                      await _signInManager.SignInAsync(user, isPersistent: false);
                      return LocalRedirect(returnUrl);
                     

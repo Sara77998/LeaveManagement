@@ -43,17 +43,18 @@ namespace Projekattt1
             //dodavanje mapera
             services.AddAutoMapper(typeof(Maps));
 
-
             services.AddDatabaseDeveloperPageExceptionFilter();
-
+            //obrisana je opcija iz zagrade da kada se registruje korisnik treba da potvrdi registraciju na emailu
             services.AddDefaultIdentity<IdentityUser>()
-                .AddRoles<IdentityRole>//obrisana je opcija iz zagrade da kada se registruje korisnik treba da potvrdi registraciju na emailu
+                .AddRoles<IdentityRole>()           
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
             services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -73,6 +74,8 @@ namespace Projekattt1
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            SeedData.Seed(userManager, roleManager);
 
             app.UseEndpoints(endpoints =>
             {
