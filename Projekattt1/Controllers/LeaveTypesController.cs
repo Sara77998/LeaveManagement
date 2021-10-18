@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Projekattt1.Contracts;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Projekattt1.Controllers
 {
+    [Authorize(Roles ="Administrator")]
     public class LeaveTypesController : Controller
     {
         private readonly ILeaveTypeRepositiry _repo;
@@ -20,6 +22,7 @@ namespace Projekattt1.Controllers
             _repo = repo;
             _mapper = mapper;
         }
+       
         // GET: LeaveTypesController
         public ActionResult Index()
         {

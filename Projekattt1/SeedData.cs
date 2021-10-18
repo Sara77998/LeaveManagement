@@ -21,9 +21,9 @@ namespace Projekattt1
                 var user = new IdentityUser
                 {
                     UserName = "admin",
-                    Email = "admin@localhost"
+                    Email = "admin1@localhost.com"
                 };
-                var resoult = userManager.CreateAsync(user, "P@ssword1").Result;
+                var resoult = userManager.CreateAsync(user, "P@ssword11").Result;
                 if (resoult.Succeeded)
                 {
                     userManager.AddToRoleAsync(user, "Administrator").Wait();

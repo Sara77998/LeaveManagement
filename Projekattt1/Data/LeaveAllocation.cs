@@ -19,5 +19,6 @@ namespace Projekattt1.Data
         [ForeignKey("LeaveTypeId")]
         public LeaveTypes LeaveType { get; set; }
         public int LeaveTypeId { get; set; }
+        public int Period { get; set; }
     }
 }
