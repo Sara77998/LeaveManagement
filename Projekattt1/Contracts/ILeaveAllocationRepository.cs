@@ -9,5 +9,6 @@ namespace Projekattt1.Contracts
     public interface ILeaveAllocationRepository : IRepositiryBase<LeaveAllocation>
     {
         bool CheckAllocation(int leavetypeid, string employeeid);
+        ICollection<LeaveAllocation> GetLeaveAllocationByEmpoyee(string id);
     }
 }

@@ -44,6 +44,12 @@ namespace Projekattt1.Repository
             return leaveType;
         }
 
+        public ICollection<LeaveAllocation> GetLeaveAllocationByEmpoyee(string id)
+        {
+            var period = DateTime.Now.Year;
+            return FindAll().Where(q => q.EmployeeId == id && q.Period == period).ToList();
+        }
+
         public bool isExists(int id)
         {
             var exists = _db.LeaveAllocations.Any(q => q.Id == id);
