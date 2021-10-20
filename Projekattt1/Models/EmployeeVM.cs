@@ -7,7 +7,7 @@ namespace Projekattt1.Models
 {
     public class EmployeeVM
     {
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string UserName { get; set; }//mora da se mecuje sa tipom iz baze
         public string Email { get; set; }
         public string PhoneNumber { get; set; }

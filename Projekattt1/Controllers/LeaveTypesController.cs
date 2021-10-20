@@ -30,6 +30,7 @@ namespace Projekattt1.Controllers
             var model = _mapper.Map<List<LeaveTypes>, List<LeaveTypeVM>>(leavetypes);
             return View(model);
         }
+        
 
         // GET: LeaveTypesController/Details/5
         public ActionResult Details(int id)

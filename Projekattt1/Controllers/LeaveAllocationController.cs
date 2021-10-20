@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Projekattt1.Contracts;
 using Projekattt1.Data;
@@ -10,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace Projekattt1.Controllers
 {
     [Authorize(Roles ="Administrator")]
@@ -18,13 +20,16 @@ namespace Projekattt1.Controllers
         private readonly ILeaveTypeRepositiry _leaverepo;
         private readonly ILeaveAllocationRepository _leaveallocationrepo;
         private readonly IMapper _mapper;
+        private readonly UserManager<Employee> _userManager;
         public LeaveAllocationController(ILeaveTypeRepositiry leaverepo,
             ILeaveAllocationRepository leaveallocationrepo,
-            IMapper mapper)
+            IMapper mapper,
+            UserManager<Employee> userManager)
         {
             _leaverepo = leaverepo;
             _leaveallocationrepo = leaveallocationrepo;
             _mapper = mapper;
+            _userManager = userManager;
         }
 
 
@@ -32,10 +37,47 @@ namespace Projekattt1.Controllers
         public ActionResult Index()
         {
             var leavetypes = _leaverepo.FindAll().ToList();
-            var model = _mapper.Map<List<LeaveTypes>, List<LeaveTypeVM>>(leavetypes);
+            var mappedLeaveTypes = _mapper.Map<List<LeaveTypes>, List<LeaveTypeVM>>(leavetypes);
+            var model = new CreateLeaveAllocationVM
+            {
+                LeaveTypes = mappedLeaveTypes,
+                NumberUpdated = 0
+            };
             return View(model);
            
         }
+
+        public ActionResult SetLeave(int id)
+        {
+            var leavetype = _leaverepo.FindById(id);
+            var employees = _userManager.GetUsersInRoleAsync("Employee").Result;
+            foreach (var emp in employees)
+            {
+                if (_leaveallocationrepo.CheckAllocation(id, emp.Id))
+                    continue;
+                
+                var allocation = new LeaveAllocationVM
+                {
+                    DataCreated = DateTime.Now,
+                    EmployeeId = emp.Id,
+                    LeaveTypeId = id,
+                    NumberOfDays = leavetype.DefaultDays,
+                    Period = DateTime.Now.Year
+                };
+                var leaveallocation = _mapper.Map<LeaveAllocation>(allocation);
+
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult ListEmployees()
+        {
+            var employees = _userManager.GetUsersInRoleAsync("Employee").Result;
+            var model = _mapper.Map<List<EmployeeVM>>(employees);
+            return View(model);
+
+        }
+
 
         // GET: LeaveAllocationController/Details/5
         public ActionResult Details(int id)

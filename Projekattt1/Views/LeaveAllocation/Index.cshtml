@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Projekattt1.Models.LeaveTypeVM>
+﻿@model Projekattt1.Models.CreateLeaveAllocationVM
 
 @{
     ViewData["Title"] = "Index";
@@ -7,25 +7,30 @@
 <h1>Index</h1>
 
 
-<table class="table">
+<table id="tblData" class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.LeaveTypes)
             </th>
             
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.LeaveTypes) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             
             <td>
-                @Html.ActionLink("Allocate to Employees","SetLeave", new {id = item.Id})
+               
+                <a class="btn btn-outline-success" asp-action="SetLeave" asp-route-id="@item.Id">
+                    <i class="fas fa-pencil"></i>
+                        Allocate to Employees
+                    
+                </a>
                
             </td>
         </tr>
