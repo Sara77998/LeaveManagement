@@ -1,4 +1,5 @@
-﻿using Projekattt1.Contracts;
+﻿using Microsoft.EntityFrameworkCore;
+using Projekattt1.Contracts;
 using Projekattt1.Data;
 using System;
 using System.Collections.Generic;
@@ -35,12 +36,19 @@ namespace Projekattt1.Repository
 
         public ICollection<LeaveAllocation> FindAll()
         {
-            return _db.LeaveAllocations.ToList();
+            return _db.LeaveAllocations
+                .Include(q=>q.LeaveType)
+                .Include(q=>q.Employee)
+                .ToList();
         }
 
         public LeaveAllocation FindById(int id)
         {
-            var leaveType = _db.LeaveAllocations.Find(id);
+            var leaveType = _db.LeaveAllocations
+                .Include(q => q.LeaveType)
+                .Include(q => q.Employee)
+                .FirstOrDefault(q=> q.Id==id);
+
             return leaveType;
         }
 

@@ -20,5 +20,7 @@ namespace Projekattt1.Data
         public DbSet<LeaveAllocation> LeaveAllocations { get; set; }
         public DbSet<Projekattt1.Models.LeaveTypeVM> DetailsLeaveTypeVM { get; set; }
         public DbSet<Projekattt1.Models.EmployeeVM> EmployeeVM { get; set; }
+        public DbSet<Projekattt1.Models.LeaveAllocationVM> LeaveAllocationVM { get; set; }
+        public DbSet<Projekattt1.Models.EditLeaveAllocationVM> EditLeaveAllocationVM { get; set; }
     }
 }
