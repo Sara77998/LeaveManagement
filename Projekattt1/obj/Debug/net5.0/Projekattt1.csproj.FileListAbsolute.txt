@@ -207,3 +207,5 @@ C:\Users\Sara\source\repos\ASP.Net\Projekattt1\Projekattt1\obj\Debug\net5.0\Razo
 C:\Users\Sara\source\repos\ASP.Net\Projekattt1\Projekattt1\obj\Debug\net5.0\Razor\Views\LeaveAllocation\ListEmployees.cshtml.g.cs
 C:\Users\Sara\source\repos\ASP.Net\Projekattt1\Projekattt1\obj\Debug\net5.0\Razor\Views\LeaveAllocation\Details.cshtml.g.cs
 C:\Users\Sara\source\repos\ASP.Net\Projekattt1\Projekattt1\obj\Debug\net5.0\Razor\Views\LeaveAllocation\Edit.cshtml.g.cs
+C:\Users\Sara\source\repos\ASP.Net\Projekattt1\Projekattt1\obj\Debug\net5.0\Razor\Views\LeaveRequest\Index.cshtml.g.cs
+C:\Users\Sara\source\repos\ASP.Net\Projekattt1\Projekattt1\obj\Debug\net5.0\Razor\Views\LeaveRequest\Create.cshtml.g.cs

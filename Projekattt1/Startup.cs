@@ -37,7 +37,7 @@ namespace Projekattt1
 
             //add references for repository and contracts to startup file
             services.AddScoped<ILeaveTypeRepositiry, LeaveTypeRepository>();
-            services.AddScoped<ILeaveHistoryRepository, LeaveHistoryRepository>();
+            services.AddScoped<ILeaveRequestRepository, LeaveRequestRepository>();
             services.AddScoped<ILeaveAllocationRepository, LeaveAllocationRepository>();
 
             //dodavanje mapera

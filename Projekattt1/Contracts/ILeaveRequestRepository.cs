@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projekattt1.Contracts
 {
-    public interface ILeaveHistoryRepository : IRepositiryBase<LeaveHistory>
+    public interface ILeaveRequestRepository : IRepositiryBase<LeaveRequest>
     {
     }
 }
