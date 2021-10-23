@@ -52,4 +52,9 @@ namespace Projekattt1.Models
         [Display(Name = "Leave Type")]
         public int LeaveTypeId { get; set; }
     }
+    public class EmployeeLeaveRequestViewVM
+    {
+        public List<LeaveAllocationVM> LeaveAllocations { get; set; }
+        public List<LeaveRequestVM> LeaveRequests { get; set; }
+    }
 }

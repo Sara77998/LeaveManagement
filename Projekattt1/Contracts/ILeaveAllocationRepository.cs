@@ -11,5 +11,6 @@ namespace Projekattt1.Contracts
         bool CheckAllocation(int leavetypeid, string employeeid);
         ICollection<LeaveAllocation> GetLeaveAllocationByEmpoyee(string id);
         LeaveAllocation GetLeaveAllocationByEmpoyeeAndtype(string id, int leavetypeid);
+        
     }
 }

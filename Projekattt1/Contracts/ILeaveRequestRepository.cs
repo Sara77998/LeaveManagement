@@ -8,5 +8,6 @@ namespace Projekattt1.Contracts
 {
     public interface ILeaveRequestRepository : IRepositiryBase<LeaveRequest>
     {
+        ICollection<LeaveRequest> GetLeaveRequestsByEmployee(string employeeid);
     }
 }

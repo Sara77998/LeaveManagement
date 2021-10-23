@@ -56,22 +56,84 @@ namespace Projekattt1.Controllers
             return View(model);
         }
 
+        public ActionResult MyLeave()
+        {
+            var employee = _userManager.GetUserAsync(User).Result;
+            var employeeid = employee.Id;
+            var employeeallocations = _leaveAllocationRepo.GetLeaveAllocationByEmpoyee(employeeid);
+            var employeerequests = _leaveRequestRepo.GetLeaveRequestsByEmployee(employeeid);
+
+            var employeeallocationmodel = _mapper.Map<List<LeaveAllocationVM>>(employeeallocations);
+            var employeerequestmodel = _mapper.Map<List<LeaveRequestVM>>(employeerequests);
+
+            var model = new EmployeeLeaveRequestViewVM
+            {
+                LeaveAllocations = employeeallocationmodel,
+                LeaveRequests = employeerequestmodel
+            };
+
+            return View(model);
+        }
+
+
+
         // GET: LeaveRequestController/Details/5
         public ActionResult Details(int id)
         {
-            var leaverequest = _leaveAllocationRepo.FindById(id);
+            var leaverequest = _leaveRequestRepo.FindById(id);
             var model = _mapper.Map<LeaveRequestVM>(leaverequest);
 
             return View(model);
         }
         public ActionResult ApproveRequest(int id)
         {
-            var leaverequest = _leavereqRepo.FindById(id);
-            LeaveRequest.
+            try
+            {
+                var employee = _userManager.GetUserAsync(User).Result;
+                var leaverequest = _leaveRequestRepo.FindById(id);
+                var employeeid = leaverequest.RequestingEmployeeId;
+                var leavetypeid = leaverequest.LeaveTypeId;
+                var allocation = _leaveAllocationRepo.GetLeaveAllocationByEmpoyeeAndtype(employeeid, leavetypeid);
+
+                int daysRequested = (int)(leaverequest.EndDate - leaverequest.StartDate).TotalDays;
+                allocation.NumberOfDays = allocation.NumberOfDays - daysRequested;
+
+                leaverequest.Approved = true;
+                leaverequest.ApprovedById = employee.Id;
+                leaverequest.DateActioned = DateTime.Now;             
+
+                _leaveRequestRepo.Update(leaverequest);
+                _leaveAllocationRepo.Update(allocation);
+
+                return RedirectToAction(nameof(Index), "Home");
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction(nameof(Index), "Home");
+            }
+           
         }
         public ActionResult RejectRequest(int id)
         {
-            var leaverequest = _leaveAllocationRepo.FindById(id);
+            try
+            {
+                var employee = _userManager.GetUserAsync(User).Result;
+                var leaverequest = _leaveRequestRepo.FindById(id);
+               
+
+                leaverequest.Approved = false;
+                leaverequest.ApprovedById = employee.Id;
+                leaverequest.DateActioned = DateTime.Now;
+
+                _leaveRequestRepo.Update(leaverequest);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction(nameof(Index));
+            }
         }
         // GET: LeaveRequestController/Create
         public ActionResult Create()
@@ -119,7 +181,11 @@ namespace Projekattt1.Controllers
                 var employee = _userManager.GetUserAsync(User).Result;
                 var allocation = _leaveAllocationRepo.GetLeaveAllocationByEmpoyeeAndtype(employee.Id, model.LeaveTypeId);
                 int daysRequested = (int)(endDate - startDate).TotalDays;
-                
+                if (allocation == null)
+                {
+                    ModelState.AddModelError("", "You Have No Days Left");
+                    return View(model);
+                }
                 if (daysRequested > allocation.NumberOfDays)
                 {
                     ModelState.AddModelError("", "Cant have this many days");
