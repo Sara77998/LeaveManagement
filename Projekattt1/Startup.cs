@@ -72,9 +72,11 @@ namespace Projekattt1
 
             app.UseRouting();
 
+            //vec je ugradjena autentifikacija
             app.UseAuthentication();
             app.UseAuthorization();
 
+            //povezuje se sa klasom SeedData i njenom motodom Seed koja unosi uloge(admin i employee)
             SeedData.Seed(userManager, roleManager);
 
             app.UseEndpoints(endpoints =>

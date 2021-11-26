@@ -46,7 +46,9 @@ namespace Projekattt1.Controllers
             return View(model);
            
         }
-
+        //dodeljivanje novog leavtype-a svim employees
+        //u tabeli leaveallocations moze se videti da su dani bolovanja dodeljeni svim zaposlenima
+        //onemoguceno je dupliranje u tablei i kad se vise puta pritisne dugme allocate to employee
         public ActionResult SetLeave(int id)
         {
             var leavetype = _leaverepo.FindById(id);
@@ -65,7 +67,7 @@ namespace Projekattt1.Controllers
                     Period = DateTime.Now.Year
                 };
                 var leaveallocation = _mapper.Map<LeaveAllocation>(allocation);
-
+                _leaveallocationrepo.Create(leaveallocation);
             }
             return RedirectToAction(nameof(Index));
         }

@@ -17,15 +17,17 @@ namespace Projekattt1
 
         private static void SeedUsers(UserManager<Employee> userManager)
         {
-            if (userManager.FindByNameAsync("admin").Result == null)
+            var users = userManager.GetUsersInRoleAsync("Employee").Result;
+
+            if (userManager.FindByNameAsync("admin@localhost.com").Result == null)
             {
                 var user = new Employee
                 {
-                    UserName = "admin",
-                    Email = "admin1@localhost.com"
+                    UserName = "admin@localhost.com",
+                    Email = "admin@localhost.com"
                 };
-                var resoult = userManager.CreateAsync(user, "P@ssword11").Result;
-                if (resoult.Succeeded)
+                var result = userManager.CreateAsync(user, "P@ssword1").Result;
+                if (result.Succeeded)
                 {
                     userManager.AddToRoleAsync(user, "Administrator").Wait();
                 }
